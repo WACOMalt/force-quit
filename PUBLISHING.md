@@ -9,7 +9,7 @@ Use this file to keep the KDE Store listing consistent between releases.
 - **Plugin Id**: `bsums.xyz.forcequit`
 - **Category**: Plasma → Plasma 6 Applets
 - **License**: GPL-2.0-or-later
-- **Homepage / Source**: _not set yet — see "Before the first upload"_
+- **Homepage / Source**: https://github.com/WACOMalt/force-quit
 
 ## Description
 
@@ -26,6 +26,8 @@ Copy this text into the store description field:
 > This widget is a port of the Cinnamon "Force Quit" applet to Plasma 6.
 >
 > Warning: a killed program does not save its work.
+>
+> Source: https://github.com/WACOMalt/force-quit
 
 ## Logo
 
@@ -61,18 +63,18 @@ them the same way.
 
 Do these three things one time.
 
-1. **Choose the licence.** `metadata.json` declares `GPL-2.0-or-later`, because
-   the Cinnamon applet this is based on is GPL. bs-updater uses The Unlicense.
-   The two do not have to match. Add a `LICENSE` file with the full text of the
-   licence you choose, and make `metadata.json` agree with it.
+1. **The licence is set.** `metadata.json` declares `GPL-2.0-or-later`, because
+   the Cinnamon applet this is based on is GPL. bs-updater uses The Unlicense;
+   the two do not have to match. `LICENSE` holds the full GPL-2.0 text and
+   `main.qml` carries the matching SPDX header.
 
 2. **Do not change the plugin Id.** The Id is `bsums.xyz.forcequit`. It follows
    the same reverse-domain form as `bsums.xyz.bs-updater`. The store and
    Discover use the Id to match an update to an installed widget, so the Id
    cannot change after the first upload without making a new product.
 
-3. **Set the homepage.** Create the source repository, then put its URL in the
-   "Homepage / Source" field above and in the description text.
+3. **Make the logo and the screenshots.** These are the only items left before
+   the first upload. See the two sections above.
 
 ## How to publish an update
 

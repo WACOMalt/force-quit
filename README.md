@@ -3,6 +3,8 @@
 A port of the Cinnamon [Force Quit](https://cinnamon-spices.linuxmint.com/applets/view/4)
 spice (`force-quit@cinnamon.org`) to a Plasma 6 panel applet.
 
+Source: https://github.com/WACOMalt/force-quit
+
 Click the panel icon, then click any window — it is killed immediately.
 
 ## Why not `xkill`?
