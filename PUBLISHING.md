@@ -31,21 +31,20 @@ Copy this text into the store description field:
 
 ## Logo
 
-The widget uses the `process-stop` icon from the active icon theme, so there is
-no logo file in this repository yet. The store listing needs its own logo image.
+- `logo/logo.svg`: the source file
+- `logo/logo.png`: the 512x512 render for the store logo field
 
-Make a 512x512 PNG before the first upload. Put the source SVG in `logo/logo.svg`
-and render it with:
+Render a new PNG after a change to the SVG:
 
 ```
 rsvg-convert -w 512 -h 512 logo/logo.svg -o logo/logo.png
 ```
 
-`rsvg-convert` is not installed on this machine. Install it with:
-
-```
-sudo dnf install librsvg2-tools
-```
+The logo is derived from the Breeze `process-stop` icon, which is the icon the
+applet shows in the panel. Breeze is licensed LGPL-3.0-or-later AND
+CC-BY-SA-4.0. Keep the attribution comment at the top of `logo/logo.svg`. If
+you do not want to carry that licence on the store listing, replace the logo
+with an original drawing.
 
 ## Screenshots
 
@@ -73,8 +72,8 @@ Do these three things one time.
    Discover use the Id to match an update to an installed widget, so the Id
    cannot change after the first upload without making a new product.
 
-3. **Make the logo and the screenshots.** These are the only items left before
-   the first upload. See the two sections above.
+3. **Make the screenshots.** This is the only item left before the first
+   upload. See the Screenshots section above. The logo is done.
 
 ## How to publish an update
 
