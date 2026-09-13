@@ -1,0 +1,19 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "ben@bsums.xyz",
+                "Name": "BSumsXYZ"
+            }
+        ],
+        "Category": "System Information",
+        "Description": "Click the applet, then click any window to force it to close",
+        "Icon": "process-stop",
+        "Id": "bsums.xyz.forcequit",
+        "License": "GPL-2.0-or-later",
+        "Name": "Force Quit",
+        "Version": "1.0.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}
