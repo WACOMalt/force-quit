@@ -48,15 +48,79 @@ with an original drawing.
 
 ## Screenshots
 
-The store listing needs at least one screenshot. Take these two:
-
-- `screenshots/screenshot-panel.png`: the icon in the panel
+- `screenshots/screenshot-panel.png`: the icon in the panel — **done**
 - `screenshots/screenshot-cursor.png`: the changed cursor over a target window
+  — **still to make**
 
-Blur the other panel icons and any window titles. This draws attention to the
-Force Quit icon and hides the applications of the person who makes the
-screenshot. Make new screenshots when the icon or the panel changes, and blur
-them the same way.
+Blur everything except the widget. This draws attention to the Force Quit icon
+and hides the applications and the window titles of the person who makes the
+screenshot.
+
+### How the panel screenshot was made
+
+The style matches the bs-updater screenshots: a strip of the panel, blurred,
+with the widget left sharp.
+
+1. Capture the desktop:
+
+   ```
+   spectacle -b -n -f -o full.png
+   ```
+
+2. Find the widget. The icon is the only Breeze red (`#da4453`) in the panel,
+   so it can be located without measuring by hand:
+
+   ```
+   magick full.png -crop 120x50+1780+1150 +repage -fuzz 10% \
+     +transparent "#da4453" -trim -format "%wx%h at +%X+%Y\n" info:
+   ```
+
+3. Crop a 354x40 strip of the panel and scale it 7 times, which gives the
+   2478x280 size the bs-updater screenshots use:
+
+   ```
+   magick full.png -crop 354x40+1566+1160 +repage -filter Lanczos -resize 700% big.png
+   ```
+
+4. Make a mask that is black everywhere and white over the widget. The mask
+   must have no alpha channel, or the composite step reads the alpha channel
+   instead of the grey values and nothing is blurred:
+
+   ```
+   magick -size 2478x280 xc:black -fill white \
+     -draw "roundrectangle 1911,21 2149,259 28,28" \
+     -alpha off -colorspace Gray -blur 0x6 mask.png
+   ```
+
+5. Blur the strip, then put the sharp widget back through the mask:
+
+   ```
+   magick big.png -blur 0x22 blurred.png
+   magick blurred.png big.png mask.png -composite screenshots/screenshot-panel.png
+   ```
+
+The crop offsets are for a 1920x1200 screen with the panel at the bottom. Find
+the offsets again with step 2 after a panel change.
+
+### How to make the cursor screenshot
+
+This shot needs a hand on the mouse, because the cursor cannot be moved from a
+script on Wayland, and because the kill cursor cannot be cancelled from a
+script.
+
+1. Open a window you do not mind losing. This is the target to point at.
+2. Start a capture with a delay, which includes the pointer:
+
+   ```
+   spectacle -b -n -p -f -d 10000 -o /tmp/fq-cursor.png
+   ```
+
+3. Click the Force Quit widget. The cursor changes shape.
+4. Hold the cursor over the target window until the shutter fires.
+5. **Press Escape.** This cancels the kill cursor. Until you do, the next
+   click kills whatever window it lands on.
+6. Blur the result the same way as steps 3 to 5 above, with the mask over the
+   cursor instead of the widget.
 
 ## Before the first upload
 
